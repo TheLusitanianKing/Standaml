@@ -1,4 +1,4 @@
 (executable
- (public_name encryptaml)
+ (public_name standaml)
  (name main)
- (libraries encryptaml))
+ (libraries standaml))

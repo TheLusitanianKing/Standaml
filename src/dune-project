@@ -1,19 +1,19 @@
 (lang dune 3.11)
 
-(name encryptaml)
+(name standaml)
 
 (generate_opam_files true)
 
 (source
- (github TheLusitanianKing/Encryptaml))
+ (github TheLusitanianKing/Standaml))
 
 (authors "Alexandre GOMES")
 
 (license ../LICENSE)
 
 (package
- (name encryptaml)
- (synopsis "Encryption algorithms in OCaml")
+ (name standaml)
+ (synopsis "Your favorite football leagues current top 3 in your terminal")
  (depends ocaml dune))
 
 ; See the complete stanza docs at https://dune.readthedocs.io/en/stable/dune-files.html#dune-project
