@@ -20,4 +20,10 @@ let%test "parsing single line (4)" =
   Option.equal (Tuple.equal_tuple' String.equal) (parse_config_single_line "A=B=A") (Some ("A", "B"))
 
 let read_config_file filename =
-  In_channel.read_lines filename |> List.map ~f:parse_config_single_line |> failwith "TODO"
+  In_channel.read_lines filename |>
+  List.map ~f:parse_config_single_line |>
+  List.filter_opt |>
+  Map.of_alist (module String) |>
+  fun x -> match x with
+  | `Duplicate_key _ -> failwith "Could not read config file"
+  | `Ok _ -> failwith "Could read but TODO"
