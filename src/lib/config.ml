@@ -25,5 +25,5 @@ let read_config_file filename =
   List.filter_opt |>
   Map.of_alist (module String) |>
   fun x -> match x with
-  | `Duplicate_key _ -> failwith "Could not read config file"
-  | `Ok _ -> failwith "Could read but TODO"
+  | `Duplicate_key _ -> Base.Map.empty (module String)
+  | `Ok x -> x
