@@ -27,3 +27,9 @@ let read_config_file filename =
   fun x -> match x with
   | `Duplicate_key _ -> Base.Map.empty (module String)
   | `Ok x -> x
+
+let read_config_param_from_config_map config_map ~key =
+  Base.Map.find config_map key
+
+let read_config_param filename key =
+  read_config_file filename |> read_config_param_from_config_map ~key:key
