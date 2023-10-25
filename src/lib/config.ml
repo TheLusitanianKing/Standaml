@@ -15,9 +15,13 @@ let%test "parsing single line (1)" =
 let%test "parsing single line (2)" =
   Option.is_none @@ parse_config_single_line "A A"
 let%test "parsing single line (3)" =
-  Option.equal (Tuple.equal_tuple' String.equal) (parse_config_single_line "A=A") (Some ("A", "A"))
+  Option.equal (Tuple.equal_tuple' String.equal)
+    (parse_config_single_line "A=A")
+    (Some ("A", "A"))
 let%test "parsing single line (4)" =
-  Option.equal (Tuple.equal_tuple' String.equal) (parse_config_single_line "A=B=A") (Some ("A", "B"))
+  Option.equal (Tuple.equal_tuple' String.equal)
+    (parse_config_single_line "A=B=A")
+    (Some ("A", "B"))
 
 let get_config_map_from_map_of_alist x =
   match x with
