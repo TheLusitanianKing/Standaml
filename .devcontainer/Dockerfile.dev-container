@@ -1,7 +1,9 @@
 FROM ocaml/opam:debian-12-ocaml-4.08-fp
 
-RUN opam install dune.2.9.3
-RUN opam install core.v0.12.4
-RUN opam install ocaml-lsp-server
-RUN opam install utop
-RUN opam install ocamlformat
+# install basic dependencies
+RUN opam install dune.2.9.3 core.v0.12.4
+# install cohttp dependencies
+RUN sudo apt update && sudo apt install -y libssl-dev pkg-config libgmp-dev && \
+  opam install cohttp-lwt-unix.5.2.0 cohttp-async.5.2.0 lwt_ssl
+# install IDE/dev specific dependencies
+RUN opam install ocaml-lsp-server utop ocamlformat
