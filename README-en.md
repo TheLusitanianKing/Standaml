@@ -1,7 +1,9 @@
 :portugal: [Versão portuguesa/Portuguese version](README.md)
 ***
 
-# Standing of your favorite football leagues in your terminal
+# Standaml
+Standing of your favorite football leagues in your terminal
+
 Source of the results: https://www.football-data.org
 
 TODO: insert basic example here
