@@ -2,9 +2,11 @@ open Lwt
 open Cohttp
 open Cohttp_lwt_unix
 
-let body _token =
+let body token =
+  (* TODO: the competition(s) will be parametrised later *)
   let standing_route = Standaml.Api.standing_route "PPL" in
-  Client.get (Uri.of_string standing_route) >>= fun (resp, body) ->
+  let headers = Header.init_with "X-Auth-Token" token in
+  Client.get (Uri.of_string standing_route) ~headers >>= fun (resp, body) ->
   let code = resp |> Response.status |> Code.code_of_status in
   Printf.printf "Response code: %d\n" code;
   Printf.printf "Headers: %s\n" (resp |> Response.headers |> Header.to_string);
