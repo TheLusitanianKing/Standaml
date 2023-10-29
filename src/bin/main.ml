@@ -2,8 +2,9 @@ open Lwt
 open Cohttp
 open Cohttp_lwt_unix
 
-let body =
-  Client.get (Uri.of_string "https://reidelusitania.pt/") >>= fun (resp, body) ->
+let body _token =
+  let standing_route = Standaml.Api.standing_route "PPL" in
+  Client.get (Uri.of_string standing_route) >>= fun (resp, body) ->
   let code = resp |> Response.status |> Code.code_of_status in
   Printf.printf "Response code: %d\n" code;
   Printf.printf "Headers: %s\n" (resp |> Response.headers |> Header.to_string);
@@ -20,6 +21,6 @@ let () =
     | None ->
       print_endline "No token specified in `standaml.conf`."
     | Some token ->
-      let resp = Lwt_main.run body in
+      let resp = Lwt_main.run @@ body token in
       print_endline @@
         Printf.sprintf "Hello football fans (token is: %s)\n%s" token resp
