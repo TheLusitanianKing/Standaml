@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Build/Test
 
 on:
   push:
@@ -11,11 +11,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag standaml:$(date +%s)
-
-    - name: Build
-      run: docker run --rm -w /src --mount type=bind,src=$(pwd),dst=/src standaml:$(date +%s) sh -c "cd src/ && make build"
-    
-    - name: Test
-      run: docker run --rm -w /src --mount type=bind,src=$(pwd),dst=/src standaml:$(date +%s) sh -c "cd src/ && make test"
+    - name: Build and test
+      run: docker build . --file Dockerfile --tag standaml:$(date +%s) && \
+        docker run --rm -w /src --mount type=bind,src=$(pwd),dst=/src standaml:$(date +%s) sh -c "cd src/ && make build && make test"
