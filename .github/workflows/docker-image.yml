@@ -15,7 +15,7 @@ jobs:
       run: docker build . --file Dockerfile --tag standaml:${{github.sha}}
 
     - name: Build
-      run: docker run --rm -w /src --mount type=bind,src=$(pwd),dst=/src standaml:${{github.sha}} sh -c "cd src/ && sudo make build"
+      run: docker run --rm -w /src --mount type=bind,src=$(pwd),dst=/src standaml:${{github.sha}} sh -c "cd src/ && sudo su && make build"
     
     - name: Test
-      run: docker run --rm -w /src --mount type=bind,src=$(pwd),dst=/src standaml:${{github.sha}} sh -c "cd src/ && sudo make test"
+      run: docker run --rm -w /src --mount type=bind,src=$(pwd),dst=/src standaml:${{github.sha}} sh -c "cd src/ && sudo su && make test"
