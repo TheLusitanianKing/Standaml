@@ -12,7 +12,10 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag standaml:latest
+      run: docker build . --file Dockerfile --tag standaml:$(date +%s)
 
-    - name: Build and test
-      run: docker run --rm -w /src --mount type=bind,src=$(shell pwd),dst=/src standaml:latest sh -c "cd src/ && make test && make build"
+    - name: Build
+      run: docker run --rm -w /src --mount type=bind,src=$(pwd),dst=/src standaml:$(date +%s) sh -c "cd src/ && make build"
+    
+    - name: Test
+      run: docker run --rm -w /src --mount type=bind,src=$(pwd),dst=/src standaml:$(date +%s) sh -c "cd src/ && make test"
