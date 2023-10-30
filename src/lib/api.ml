@@ -6,4 +6,4 @@ let standing_route competition_code =
   Printf.sprintf "%s/competitions/%s/standings" base_url competition_code
 
 let%test "standing route" =
-  phys_equal (standing_route "PPL") "https://api.football-data.org/v4/competitions/PPL/standings"
+  String.equal (standing_route "PPL") "https://api.football-data.org/v4/competitions/PPL/standings"
