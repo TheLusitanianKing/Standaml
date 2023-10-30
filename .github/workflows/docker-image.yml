@@ -1,4 +1,4 @@
-name: Build/Test
+name: CI
 
 on:
   push:
@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - name: Build and test
+    - name: Build Docker image
       run: docker build . --file Dockerfile --tag standaml:${{github.sha}}
 
     - name: Build
