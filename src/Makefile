@@ -14,6 +14,9 @@ build: ## Build the app
 run: ## Run the app
 	dune exec standaml
 
+test: ### Test the app
+	dune test
+
 all: ## The simplest option (build, run and then clean)
 	$(MAKE) build
 	$(MAKE) run
