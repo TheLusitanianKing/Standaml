@@ -1,7 +1,7 @@
 :england: [English version/Versão inglesa](README-en.md)
 ***
 
-# Standaml
+# Standaml [![CI](https://github.com/TheLusitanianKing/Standaml/actions/workflows/docker-image.yml/badge.svg)](https://github.com/TheLusitanianKing/Standaml/actions/workflows/docker-image.yml)
 Classificação das tuas ligas preferidas de futebol no teu terminal
 
 Fonte dos resultados: https://www.football-data.org
