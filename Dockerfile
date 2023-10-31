@@ -1,5 +1,7 @@
 FROM ocaml/opam:debian-12-ocaml-4.08-fp
 
+USER root
+
 # install basic dependencies
 RUN opam install dune.2.9.3 core.v0.12.4
 # install cohttp dependencies
