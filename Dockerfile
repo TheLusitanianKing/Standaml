@@ -1,5 +1,6 @@
 FROM ocaml/opam:debian-12-ocaml-4.08-fp
 
+# not ideal, but only used by GitHub actions for now
 USER root
 
 # install basic dependencies
