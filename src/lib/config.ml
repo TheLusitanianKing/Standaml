@@ -1,7 +1,6 @@
 open Base
 open Stdio
 
-(* Parse a single config line *)
 let parse_config_single_line line =
   let filtered = String.split ~on:'=' line
     |> List.filter ~f:(fun x -> not @@ String.is_empty x) in

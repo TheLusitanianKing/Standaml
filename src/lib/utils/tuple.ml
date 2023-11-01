@@ -1,8 +1,3 @@
-(*
-  some utility functions for tuple (/product)
-  N.B. some of these might exist somewhere but I couldn't find it
-*)
-
 let equal_tuple cmp1 cmp2 (x, y) (x', y') =
   cmp1 x x' && cmp2 y y'
 
