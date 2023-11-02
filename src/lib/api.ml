@@ -1,9 +1,16 @@
 open Base
+open Cohttp
+open Cohttp_lwt_unix
+open Lwt
 
-let base_url = "https://api.football-data.org/v4"
-
-let standing_route competition_code =
-  Printf.sprintf "%s/competitions/%s/standings" base_url competition_code
-
-let%test "standing route" =
-  String.equal (standing_route "PPL") "https://api.football-data.org/v4/competitions/PPL/standings"
+let fetch_standing token competition =
+  (* TODO: the competition(s) will be parametrised later *)
+  let standing_route = Route.standing_route competition in
+  let headers = Header.init_with "X-Auth-Token" token in
+  Client.get (Uri.of_string standing_route) ~headers >>= fun (resp, body) ->
+  let code = resp |> Response.status |> Code.code_of_status in
+  Stdio.print_endline @@
+    Printf.sprintf "Response code: %d\n" code;
+  Stdio.print_endline @@
+    Printf.sprintf "Headers: %s\n" (resp |> Response.headers |> Header.to_string);
+  body |> Cohttp_lwt.Body.to_string

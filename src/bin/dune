@@ -1,4 +1,4 @@
 (executable
  (public_name standaml)
  (name main)
- (libraries standaml lwt cohttp cohttp-lwt-unix))
+ (libraries standaml))
