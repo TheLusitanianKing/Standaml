@@ -5,7 +5,6 @@ let () =
   let opt_token =
     Standaml.Config.read_config_param_from_config_map
       config_map ~key:"FOOTBALL_API_TOKEN" in
-  (* TODO: see how to propagate the option error handling *)
   match opt_token with
   | None -> failwith "No token specified in `standaml.conf`."
   | Some token ->

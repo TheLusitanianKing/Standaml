@@ -11,7 +11,7 @@ type t =
 let parse ~json =
   let open Yojson.Basic.Util in
   try
-    let team_name = "Team name (TODO)" in
+    let team_name = json |> member "team" |> member "name" |> to_string in
     let played_games = json |> member "playedGames" |> to_int in
     let won = json |> member "won" |> to_int in
     let lost = json |> member "lost" |> to_int in
@@ -32,13 +32,11 @@ let goals_difference x =
    the comparison function must return 0 if its arguments compare as equal,
    a positive integer if the first is greater,
    and a negative integer if the first is smaller *)
-(** The greatest line is the one with most points and
-    in case of equality, the one with the best goals difference *)
 let compare (x:t) (y:t): int =
   let points_diff = points x - points y in
   let goals_diff = goals_difference x - goals_difference y in
-  if points_diff = 0
-    then goals_diff
+  if points_diff = 0 (* points first *)
+    then goals_diff (* goals difference second *)
     else points_diff
 
 let%test "compare (total equality)" =
