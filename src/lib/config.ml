@@ -5,9 +5,9 @@ let parse_config_single_line line =
   let filtered = String.split ~on:'=' line
     |> List.filter ~f:(fun x -> not @@ String.is_empty x) in
   match filtered with
-    | [] -> None
-    | [_] -> None
-    | (x::y::_) -> Some (x, y) (* just ignore the rest if any *)
+  | [] -> None
+  | [_] -> None
+  | (x::y::_) -> Some (x, y) (* just ignore the rest if any *)
 
 let%test "parsing single line (1)" =
   Option.is_none @@ parse_config_single_line "A="
@@ -24,8 +24,8 @@ let%test "parsing single line (4)" =
 
 let get_config_map_from_map_of_alist x =
   match x with
-    | `Duplicate_key _ -> Base.Map.empty (module String)
-    | `Ok x -> x
+  | `Duplicate_key _ -> Base.Map.empty (module String)
+  | `Ok x -> x
 
 let read_config_file filename =
   In_channel.read_lines filename |>
