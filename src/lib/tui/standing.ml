@@ -14,5 +14,5 @@ let display_standing ~(standing:Model.Standing.t) ~standing_format =
     |> List.map ~f:(fun standing_line -> display_standing_line ~standing_line) in
   let open Standing_format in
   match standing_format with
-  | Default  -> formatted_lines |> String.concat ~sep:"\n" 
+  | Simple   -> formatted_lines |> String.concat ~sep:"\n" 
   | One_line -> formatted_lines |> String.concat ~sep:" | "
