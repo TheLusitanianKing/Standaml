@@ -3,7 +3,7 @@ open Base
 let usage_msg = "standaml -n <MAX_TEAMS_PER_COMP_STANDING> -t <TOKEN> -f <FORMAT> <COMPETITION_CODE_1> [<COMPETITION_CODE_2>]"
 
 let format_raw = ref ""
-let nb_teams = ref 100
+let limit = ref 0
 let arg_token = ref ""
 let competitions = ref []
 
@@ -11,7 +11,7 @@ let speclist =
   [ ("-t", Stdlib.Arg.Set_string arg_token, "Football API token (not needed if specified in the config file)")
   ; ("-f", Stdlib.Arg.Set_string format_raw, "Format (options are: simple (default), one-line)")
   (* TODO: below isn't used yet *)
-  ; ("-n", Stdlib.Arg.Set_int nb_teams, "Limit how many teams per competition should be displayed in the standings")
+  ; ("-n", Stdlib.Arg.Set_int limit, "Limit how many teams per competition should be displayed in the standings")
   ]
 
 let get_token_from_config_or_fail =
@@ -30,12 +30,12 @@ let get_token_or_fail ref_token =
 let add_competition competition =
   competitions := competition::!competitions
 
-let fetch_standing_or_error ~token ~competition ~format =
+let fetch_standing_or_error ~token ~competition ~format ~limit =
   let opt_standing = Lwt_main.run @@ Standaml.Api.fetch_standing ~token ~competition in
   match opt_standing with
   | None -> Stdio.print_endline @@ Printf.sprintf "Couldn't fetch standing for competition %s" competition
   | Some standing ->
-    let standing_display = Standaml.Tui.Standing.display_standing ~standing ~standing_format:format in
+    let standing_display = Standaml.Tui.Standing.display_standing ~standing ~standing_format:format ~limit in
     Stdio.print_endline standing_display
 
 let () =
@@ -43,4 +43,6 @@ let () =
   let token = get_token_or_fail arg_token in
   let opt_format = Standaml.Tui.Standing_format.string_to_format !format_raw in
   let format = Option.value opt_format ~default:Standaml.Tui.Standing_format.Simple in
-  !competitions |> List.iter ~f:(fun competition -> fetch_standing_or_error ~token ~competition ~format)
+  let limit = if !limit <= 0 then None else Some !limit in
+  !competitions
+    |> List.iter ~f:(fun competition -> fetch_standing_or_error ~token ~competition ~format ~limit)
