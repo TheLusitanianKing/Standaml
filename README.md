@@ -33,5 +33,8 @@ dune exec standaml -- PPL -n 5
 dune exec standaml -- --help
 ```
 
+## Futuras melhorias e bugs
+Ver [Issues](https://github.com/TheLusitanianKing/Standaml/issues)
+
 ## Licença
 ver [Licença MIT](LICENSE).
