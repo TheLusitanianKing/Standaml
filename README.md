@@ -21,7 +21,7 @@ vim standaml.conf # abrir o ficheiro de configuração com vim (ou outro) e inse
 ## Uso
 
 ```bash
-# primeiras 10 equipas da Primeira Liga portuguesa
+# primeiras 5 equipas da Primeira Liga portuguesa
 dune exec standaml -- PPL -n 5
 > 1. P10 - Sporting Clube de Portugal (28 pts) (22-9)
 > 2. P10 - Sport Lisboa e Benfica (25 pts) (21-8)

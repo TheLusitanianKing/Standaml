@@ -21,7 +21,7 @@ vim standaml.conf # open the file to fill it with your token
 ## Usage
 
 ```bash
-# show first 10 teams in the English Premier League
+# show first 5 teams in the English Premier League
 dune exec standaml -- PL -n 5
 > 1. P11 - Manchester City FC (27 pts) (28-8)
 > 2. P11 - Tottenham Hotspur FC (26 pts) (23-13)
