@@ -10,7 +10,6 @@ let competitions = ref []
 let speclist =
   [ ("-t", Stdlib.Arg.Set_string arg_token, "Football API token (not needed if specified in the config file)")
   ; ("-f", Stdlib.Arg.Set_string format_raw, "Format (options are: simple (default), one-line)")
-  (* TODO: below isn't used yet *)
   ; ("-n", Stdlib.Arg.Set_int limit, "Limit how many teams per competition should be displayed in the standings")
   ]
 
