@@ -14,8 +14,23 @@ Second step is putting the token in the config file (`standaml.conf`) that you s
 
 Example:
 ```bash
-cp standaml.default.conf standaml.conf # copiar o template
-vim standaml.conf # abrir o ficheiro de configuração com vim (ou outro) e inserir o token no lugar adequado
+cp standaml.default.conf standaml.conf # copy the template config file
+vim standaml.conf # open the file to fill it with your token
+```
+
+## Usage
+
+```bash
+# show first 10 teams in the English Premier League
+dune exec standaml -- PL -n 5
+> 1. P11 - Manchester City FC (27 pts) (28-8)
+> 2. P11 - Tottenham Hotspur FC (26 pts) (23-13)
+> 3. P11 - Arsenal FC (24 pts) (23-9)
+> 4. P11 - Liverpool FC (24 pts) (24-10)
+> 5. P11 - Aston Villa FC (22 pts) (26-16)
+
+# you can check the different options
+dune exec standaml -- --help
 ```
 
 ## License
