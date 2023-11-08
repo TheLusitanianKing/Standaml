@@ -21,7 +21,7 @@ vim standaml.conf # abrir o ficheiro de configuração com vim (ou outro) e inse
 ## Uso
 
 ```bash
-# primeiras 5 equipas da Primeira Liga portuguesa
+# primeiras 5 equipas da Primeira Liga portuguesa (código: PPL)
 dune exec standaml -- PPL -n 5
 > 1. P10 - Sporting Clube de Portugal (28 pts) (22-9)
 > 2. P10 - Sport Lisboa e Benfica (25 pts) (21-8)
@@ -32,6 +32,21 @@ dune exec standaml -- PPL -n 5
 # pode ver as diferentes opções
 dune exec standaml -- --help
 ```
+
+### Competições disponíveis
+Pode encontrar uma lista de todas as competições no seguinte link: https://docs.football-data.org/general/v4/lookup_tables.html#_league_codes.
+Verifica que a competição que deseja se encontra no seu plano.
+O plano gratuito (tier one) dá acesso as competições principais, incluindo as seguintes:
+
+* :portugal: PPL - Primeira Liga
+* :england: PL - Premier League
+* :france: FL1 - Ligue 1
+* :germany: BL1 - Bundesliga
+* :spain: PD - La Liga (Primera División)
+* :italy: SA - Serie A 
+* :netherlands: DED - Eredivisie
+
+Relembrando aqui que só funciona com competições em formato de liga.
 
 ## Futuras melhorias e bugs
 Ver [Issues](https://github.com/TheLusitanianKing/Standaml/issues)

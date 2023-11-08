@@ -9,7 +9,7 @@ Source of the results: https://www.football-data.org
 ## Configuration
 
 ### Football-data token
-First step is registering at https://www.football-data.org and get your own API token. Once registered, you should receive the token in your email or get it through the site. 
+First step is registering at https://www.football-data.org and get your own API token. Once registered, you should receive the token by email or get it through the site. 
 Second step is putting the token in the config file (`standaml.conf`) that you should copy from the template (`standaml.default.conf`).
 
 Example:
@@ -21,7 +21,7 @@ vim standaml.conf # open the file to fill it with your token
 ## Usage
 
 ```bash
-# show first 5 teams in the English Premier League
+# show first 5 teams in the English Premier League (code: PL)
 dune exec standaml -- PL -n 5
 > 1. P11 - Manchester City FC (27 pts) (28-8)
 > 2. P11 - Tottenham Hotspur FC (26 pts) (23-13)
@@ -32,6 +32,21 @@ dune exec standaml -- PL -n 5
 # you can check the different options
 dune exec standaml -- --help
 ```
+
+### Available competitions
+You can check the list of all the competitions at https://docs.football-data.org/general/v4/lookup_tables.html#_league_codes.
+Just make sure they're in your tier subscription plan.
+The free plan (tier one) gives access to the major competitions, to name only a few:
+
+* :england: PL - Premier League
+* :portugal: PPL - Primeira Liga
+* :france: FL1 - Ligue 1
+* :germany: BL1 - Bundesliga
+* :spain: PD - La Liga (Primera División)
+* :italy: SA - Serie A 
+* :netherlands: DED - Eredivisie
+
+Side note to remind that it will only work with competitions with a league format.
 
 ## Future features and bugs
 see [Issues](https://github.com/TheLusitanianKing/Standaml/issues)
