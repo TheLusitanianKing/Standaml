@@ -40,10 +40,10 @@ The free plan (tier one) gives access to the major competitions, to name only a 
 
 * :england: PL - Premier League
 * :portugal: PPL - Primeira Liga
-* :france: FL1 - Ligue 1
-* :germany: BL1 - Bundesliga
-* :spain: PD - La Liga (Primera División)
-* :italy: SA - Serie A 
+* :fr: FL1 - Ligue 1
+* :de: BL1 - Bundesliga
+* :es: PD - La Liga (Primera División)
+* :it: SA - Serie A 
 * :netherlands: DED - Eredivisie
 
 Side note to remind that it will only work with competitions with a league format.
