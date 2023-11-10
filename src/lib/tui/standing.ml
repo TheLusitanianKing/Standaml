@@ -3,7 +3,7 @@ open Base
 let display_standing_line ~(standing_line:Model.Standing_line.t) ~standing_format =
   let open Standing_format in
   match standing_format with
-  | Simple ->
+  | Classic ->
       Printf.sprintf "%d. P%d - %s (%d pts) (%d-%d)"
         standing_line.position
         standing_line.played_games
@@ -26,5 +26,5 @@ let display_standing ~(standing:Model.Standing.t) ~standing_format ~limit =
     |> List.map ~f:(fun standing_line -> display_standing_line ~standing_line ~standing_format) in
   let open Standing_format in
   match standing_format with
-  | Simple   -> formatted_lines |> String.concat ~sep:"\n" 
+  | Classic  -> formatted_lines |> String.concat ~sep:"\n" 
   | One_line -> formatted_lines |> String.concat ~sep:" - "

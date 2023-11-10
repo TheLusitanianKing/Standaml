@@ -9,7 +9,7 @@ let competitions = ref []
 
 let speclist =
   [ ("-t", Stdlib.Arg.Set_string arg_token, "Football API token (not needed if specified in the config file)")
-  ; ("-f", Stdlib.Arg.Set_string format_raw, "Format (options are: simple and one-line, default is: simple)")
+  ; ("-f", Stdlib.Arg.Set_string format_raw, "Format (options are: classic and one-line, default is: classic)")
   ; ("-n", Stdlib.Arg.Set_int limit, "Limit how many teams per competition should be displayed in the standings")
   ]
 
@@ -41,7 +41,7 @@ let () =
   Stdlib.Arg.parse speclist (fun cpt -> add_competition cpt) usage_msg;
   let token = get_token_or_fail arg_token in
   let opt_format = Standaml.Tui.Standing_format.string_to_format !format_raw in
-  let format = Option.value opt_format ~default:Standaml.Tui.Standing_format.Simple in
+  let format = Option.value opt_format ~default:Standaml.Tui.Standing_format.Classic in
   let limit = if !limit <= 0 then None else Some !limit in
   !competitions
     |> List.iter ~f:(fun competition -> fetch_standing_or_error ~token ~competition ~format ~limit)
