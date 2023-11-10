@@ -9,7 +9,7 @@ let competitions = ref []
 
 let speclist =
   [ ("-t", Stdlib.Arg.Set_string arg_token, "Football API token (not needed if specified in the config file)")
-  ; ("-f", Stdlib.Arg.Set_string format_raw, "Format (options are: simple (default), one-line)")
+  ; ("-f", Stdlib.Arg.Set_string format_raw, "Format (options are: simple and one-line, default is: simple)")
   ; ("-n", Stdlib.Arg.Set_int limit, "Limit how many teams per competition should be displayed in the standings")
   ]
 
@@ -19,7 +19,7 @@ let get_token_from_config_or_fail =
     Standaml.Config.read_config_param_from_config_map
       config_map ~key:"FOOTBALL_API_TOKEN" in
   match opt_token with
-  | None -> failwith "No token specified: none in `standaml.conf` and none passed with option -t."
+  | None -> failwith "No token specified: need to be specified either into the conf file or with the option -t."
   | Some conf_token -> conf_token
 
 let get_token_or_fail ref_token =

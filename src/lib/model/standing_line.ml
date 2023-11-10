@@ -24,10 +24,8 @@ let parse ~json =
   with
     Type_error _ -> None
 
-let points x =
-  x.won * 3 + x.draw
+let points x = x.won * 3 + x.draw
 
-let goals_difference x =
-  x.goals_for - x.goals_against
+let goals_difference x = x.goals_for - x.goals_against
 
 let compare (x:t) (y:t): int = x.position - y.position
