@@ -1,5 +1,18 @@
 open Base
 
+let columns_to_display =
+  [ ("Rank",   fun (x:Model.Standing_line.t) -> x.position |> Int.to_string)
+  ; ("Team",   fun (x:Model.Standing_line.t) -> x.team_name)
+  ; ("P",      fun (x:Model.Standing_line.t) -> x.played_games |> Int.to_string)
+  ; ("W",      fun (x:Model.Standing_line.t) -> x.won |> Int.to_string)
+  ; ("D",      fun (x:Model.Standing_line.t) -> x.draw |> Int.to_string)
+  ; ("L",      fun (x:Model.Standing_line.t) -> x.lost |> Int.to_string)
+  ; ("GF",     fun (x:Model.Standing_line.t) -> x.goals_for |> Int.to_string)
+  ; ("GA",     fun (x:Model.Standing_line.t) -> x.goals_against |> Int.to_string)
+  ; ("GD",     fun (x:Model.Standing_line.t) -> Model.Standing_line.goals_difference x |> Int.to_string)
+  ; ("Points", fun (x:Model.Standing_line.t) -> Model.Standing_line.points x |> Int.to_string)
+  ]
+
 let display_standing_line ~(standing_line:Model.Standing_line.t) ~standing_format =
   let open Standing_format in
   match standing_format with
