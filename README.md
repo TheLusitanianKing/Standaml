@@ -47,6 +47,7 @@ O plano gratuito (tier one) dá acesso as competições principais, incluindo as
 * :es: PD - La Liga (Primera División)
 * :it: SA - Serie A 
 * :netherlands: DED - Eredivisie
+* :brazil: BSA - Brasileirão
 
 Relembrando aqui que só funciona com competições em formato de liga.
 
