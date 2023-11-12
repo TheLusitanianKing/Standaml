@@ -23,11 +23,13 @@ vim standaml.conf # open the file to fill it with your token
 ```bash
 # show first 5 teams in the English Premier League (code: PL)
 dune exec standaml -- PL -n 5
-> 1. P11 - Manchester City FC (27 pts) (28-8)
-> 2. P11 - Tottenham Hotspur FC (26 pts) (23-13)
-> 3. P11 - Arsenal FC (24 pts) (23-9)
-> 4. P11 - Liverpool FC (24 pts) (24-10)
-> 5. P11 - Aston Villa FC (22 pts) (26-16)
+> Rank | Team                 | P  | W | D | L | GF | GA | GD | Points
+> --------------------------------------------------------------------
+> 1    | Manchester City FC   | 12 | 9 | 1 | 2 | 32 | 12 | 20 | 28    
+> 2    | Liverpool FC         | 12 | 8 | 3 | 1 | 27 | 10 | 17 | 27    
+> 3    | Arsenal FC           | 12 | 8 | 3 | 1 | 26 | 10 | 16 | 27    
+> 4    | Tottenham Hotspur FC | 12 | 8 | 2 | 2 | 24 | 15 | 9  | 26    
+> 5    | Aston Villa FC       | 12 | 8 | 1 | 3 | 29 | 17 | 12 | 25
 
 # you can check the different options
 dune exec standaml -- --help
