@@ -35,7 +35,7 @@ cp standaml.default.conf standaml.conf # copy the template config file
 vim standaml.conf # open the file to fill it with your token
 ```
 
-### Pre-requisites
+### Prerequisites
 #### Manual installation option
 You can choose to install everything locally, using the Dockerfile as a guide to install the right OCaml version and all the libraries dependencies. In `src/`, you'll find a `Makefile` that you can use with `make` instructions, or just read the file to see the existing `dune` commands and use those directly.
 
