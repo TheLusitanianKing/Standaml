@@ -46,7 +46,7 @@ My suggestion is using Docker. For instance:
 docker build -t standaml/ocaml .
 
 # and, being in the project's folder (otherwise, you can insert the `src` value manually), you can execute any command you wish like this below
-docker run --rm -w /app --mount type=bind,src=$(pwd),dst=/app standaml/ocaml sh -c "dune exec standaml -- PPL -n 5"
+docker run --rm -w /app --mount type=bind,src=$(pwd),dst=/app standaml/ocaml sh -c "cd src && dune exec standaml -- PPL -n 5"
 ```
 It's a quite long command but it's the simplest option for sure.
 
