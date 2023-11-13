@@ -6,18 +6,6 @@ Standing of your favorite football leagues in your terminal
 
 Source of the results: https://www.football-data.org
 
-## Configuration
-
-### Football-data token
-First step is registering at https://www.football-data.org and get your own API token. Once registered, you should receive the token by email or get it through the site. 
-Second step is putting the token in the config file (`standaml.conf`) that you should copy from the template (`standaml.default.conf`).
-
-Example:
-```bash
-cp standaml.default.conf standaml.conf # copy the template config file
-vim standaml.conf # open the file to fill it with your token
-```
-
 ## Usage
 
 ```bash
@@ -34,6 +22,36 @@ dune exec standaml -- PL -n 5
 # you can check the different options
 dune exec standaml -- --help
 ```
+
+## Configuration
+
+### Football-data token
+First step is registering at https://www.football-data.org and get your own API token. Once registered, you should receive the token by email or get it through the site. 
+Second step is putting the token in the config file (`standaml.conf`) that you should copy from the template (`standaml.default.conf`).
+
+Example:
+```bash
+cp standaml.default.conf standaml.conf # copy the template config file
+vim standaml.conf # open the file to fill it with your token
+```
+
+### Pre-requisites
+#### Manual installation option
+You can choose to install everything locally, using the Dockerfile as a guide to install the right OCaml version and all the libraries dependencies. In `src/`, you'll find a `Makefile` that you can use with `make` instructions, or just read the file to see the existing `dune` commands and use those directly.
+
+#### Docker option
+My suggestion is using Docker. For instance:
+```bash
+# build the Docker image
+docker build -t standaml/ocaml .
+
+# and, being in the project's folder (otherwise, you can insert the `src` value manually), you can execute any command you wish like this below
+docker run --rm -w /app --mount type=bind,src=$(pwd),dst=/app standaml/ocaml sh -c "dune exec standaml -- PPL -n 5"
+```
+It's a quite long command but it's the simplest option for sure.
+
+#### VSCode dev containers option
+In case, you wish to contribute or explore the actual code, you can use VSCode dev containers, it's a very nice feature and the `.devcontainer/` folder is already set up. More information about this at https://code.visualstudio.com/docs/devcontainers/containers.
 
 ### Available competitions
 You can check the list of all the competitions at https://docs.football-data.org/general/v4/lookup_tables.html#_league_codes.
