@@ -44,4 +44,5 @@ let () =
   let format = Option.value opt_format ~default:Standaml.Tui.Standing_format.Classic in
   let limit = if !limit <= 0 then None else Some !limit in
   !competitions
+    |> List.rev
     |> List.iter ~f:(fun competition -> fetch_standing_or_error ~token ~competition ~format ~limit)
