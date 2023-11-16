@@ -12,15 +12,6 @@ let fill_with content n ~fill_with_char =
 
 let fill_with_space = fill_with ~fill_with_char:' '
 
-let%test "fill (1)" =
-  String.equal (fill_with_space "AB" 3) "AB "
-
-let%test "fill (2)" =
-  String.equal (fill_with_space "AB" 2) "AB"
-
-let%test "fill (3)" =
-  String.equal (fill_with_space "AB" 0) ""
-
 (** list of list of string (+ the max size, for each column) *)
 let pretty_display (matrix: (int * string list) list) =
   let (matrix_reworked:(int * string) list list) =

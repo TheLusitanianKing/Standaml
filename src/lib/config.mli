@@ -1,3 +1,10 @@
+(** Parse a single config line, e.g. "A=B" *)
+val parse_config_single_line : string -> (string * string) option
+
+(** Create a config map from Map.of_alist function *)
+val get_config_map_from_map_of_alist : [< `Duplicate_key of 'a | `Ok of (string, 'b, Base.String.comparator_witness) Base.Map.t]
+  -> (string, 'b, Base.String.comparator_witness) Base.Map.t
+
 (** Read a config file to get a map of the config values *)
 val read_config_file : string
   -> (string, string, Base.String.comparator_witness) Base.Map.t
