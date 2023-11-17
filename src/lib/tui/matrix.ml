@@ -1,14 +1,7 @@
 open Base
 
 let fill_with content n ~fill_with_char =
-  let rec helper acc s i =
-    if i >= n
-      then acc
-      else
-        match s with
-        | [] -> acc @ List.init (n-i) ~f:(fun _ -> fill_with_char)
-        | x::xs -> helper (acc @ [x]) xs (i+1)
-  in String.of_char_list @@ helper [] (String.to_list content) 0
+  content ^ String.make (n - Batteries.UTF8.length content) fill_with_char
 
 let fill_with_space = fill_with ~fill_with_char:' '
 

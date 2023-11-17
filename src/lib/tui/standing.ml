@@ -16,7 +16,7 @@ let columns_to_display_in_classic_view =
 let prepare_columns columns standing_lines =
   List.map ~f:(fun (col_name, get_column) ->
     let col_name_size = String.length col_name in
-    let lines_with_sizes = List.map ~f:(fun sl -> let x = get_column sl in (String.length x, x)) standing_lines in
+    let lines_with_sizes = List.map ~f:(fun sl -> let x = get_column sl in (Batteries.UTF8.length x, x)) standing_lines in
     let max_size = List.fold lines_with_sizes ~init:col_name_size ~f:(fun x (y, _) -> max x y) in
     (max_size, col_name :: List.map ~f:(fun (_, x) -> x) lines_with_sizes)
   ) columns

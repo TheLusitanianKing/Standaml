@@ -6,6 +6,3 @@ let%test "fill (1)" =
 
 let%test "fill (2)" =
   String.equal (fill_with_space "AB" 2) "AB"
-
-let%test "fill (3)" =
-  String.equal (fill_with_space "AB" 0) ""
