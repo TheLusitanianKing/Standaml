@@ -1,8 +1,5 @@
 FROM ocaml/opam:debian-12-ocaml-4.08-fp
 
-# not ideal, but only used by GitHub actions for now (TODO: change this)
-USER root
-
 # install basic dependencies
 RUN opam install dune.2.9.3 core.v0.12.4 batteries.3.7.1
 # install cohttp dependencies
