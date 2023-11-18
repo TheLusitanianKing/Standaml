@@ -15,11 +15,11 @@ let get_config_map_from_map_of_alist x =
   | `Ok x -> x
 
 let read_config_file filename =
-  In_channel.read_lines filename |>
-  List.map ~f:parse_config_single_line |>
-  List.filter_opt |>
-  Map.of_alist (module String) |>
-  get_config_map_from_map_of_alist
+  In_channel.read_lines filename
+  |> List.map ~f:parse_config_single_line
+  |> List.filter_opt
+  |> Map.of_alist (module String)
+  |> get_config_map_from_map_of_alist
 
 let read_config_param_from_config_map config_map ~key =
   Base.Map.find config_map key

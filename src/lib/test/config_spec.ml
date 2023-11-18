@@ -17,15 +17,15 @@ let%test "parsing single line (4)" =
 let%test "read_config_file_from_config_map (1)" =
   let expected = Some "B" in
   let result =
-    Map.of_alist (module String) [("A", "B"); ("B", "A")] |>
-    get_config_map_from_map_of_alist |>
-    read_config_param_from_config_map ~key:"A" in
+    Map.of_alist (module String) [("A", "B"); ("B", "A")]
+    |> get_config_map_from_map_of_alist
+    |> read_config_param_from_config_map ~key:"A" in
   Option.equal String.equal result expected
 
 let%test "read_config_file_from_config_map (2)" =
   let expected = None in
   let result =
-    Map.of_alist (module String) [] |>
-    get_config_map_from_map_of_alist |>
-    read_config_param_from_config_map ~key:"A" in
+    Map.of_alist (module String) []
+    |> get_config_map_from_map_of_alist
+    |> read_config_param_from_config_map ~key:"A" in
   Option.equal String.equal result expected
