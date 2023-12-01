@@ -1,4 +1,5 @@
-val fetch : token:string
+val fetch :
+     token:string
   -> route:string
   -> parser:(json:Yojson.Basic.t -> 'a option)
-  -> ('a option) Lwt.t
+  -> 'a option Lwt.t

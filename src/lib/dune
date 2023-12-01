@@ -4,4 +4,5 @@
  (name standaml)
  (libraries base core stdio lwt cohttp cohttp-lwt-unix yojson batteries)
  (inline_tests)
- (preprocess (pps ppx_inline_test)))
+ (preprocess
+  (pps ppx_inline_test)))

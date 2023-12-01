@@ -1,6 +1,6 @@
 open Base
 
-type t = { team_standings: Standing_line.t list }
+type t = { team_standings : Standing_line.t list }
 
 let parse ~json =
   let open Yojson.Basic.Util in
@@ -9,10 +9,10 @@ let parse ~json =
     match opt_standing with
     | None -> None
     | Some st ->
-      let lines = st |> member "table"
-        |> to_list
-        |> List.filter_map ~f:(fun json -> Standing_line.parse ~json) in
-      Some { team_standings = lines }
+        let lines =
+          st |> member "table" |> to_list
+          |> List.filter_map ~f:(fun json -> Standing_line.parse ~json) in
+        Some { team_standings = lines }
   with Type_error _ -> None
 
 let sort_standing ~standing =
