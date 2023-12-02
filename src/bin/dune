@@ -1,4 +1,4 @@
 (executable
  (public_name standaml)
  (name main)
- (libraries standaml base))
+ (libraries standaml base core core_unix.command_unix))

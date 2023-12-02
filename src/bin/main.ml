@@ -1,26 +1,4 @@
-open Base
-
-let usage_msg =
-  "standaml -n <MAX_TEAMS_PER_COMP_STANDING> -t <TOKEN> -f <FORMAT> \
-   <COMPETITION_CODE_1> [<COMPETITION_CODE_2>]"
-
-let format_raw = ref ""
-let limit = ref 0
-let arg_token = ref ""
-let competitions = ref []
-
-let speclist =
-  [ ( "-t"
-    , Stdlib.Arg.Set_string arg_token
-    , "Football API token (not needed if specified in the config file)" )
-  ; ( "-f"
-    , Stdlib.Arg.Set_string format_raw
-    , "Format (options are: classic and one-line, default is: classic)" )
-  ; ( "-n"
-    , Stdlib.Arg.Set_int limit
-    , "Limit how many teams per competition should be displayed in the \
-       standings" )
-  ]
+open Core
 
 let get_token_from_config_or_fail =
   let config_map = Standaml.Config.read_config_file "../standaml.conf" in
@@ -33,12 +11,6 @@ let get_token_from_config_or_fail =
         "No token specified: need to be specified either into the conf file or \
          with the option -t."
   | Some conf_token -> conf_token
-
-let get_token_or_fail ref_token =
-  let token = !ref_token in
-  if String.length token <= 0 then get_token_from_config_or_fail else token
-
-let add_competition competition = competitions := competition :: !competitions
 
 let fetch_standing_or_error ~token ~competition ~format ~limit =
   let opt_standing =
@@ -53,13 +25,31 @@ let fetch_standing_or_error ~token ~competition ~format ~limit =
           ~limit in
       Stdio.print_endline standing_display
 
-let () =
-  Stdlib.Arg.parse speclist (fun cpt -> add_competition cpt) usage_msg;
-  let token = get_token_or_fail arg_token in
-  let opt_format = Standaml.Tui.Standing_format.string_to_format !format_raw in
+let run_command competitions opt_token opt_format limit () =
+  let token = Option.value opt_token ~default:get_token_from_config_or_fail in
+  let opt_format' =
+    Option.bind opt_format ~f:Standaml.Tui.Standing_format.string_to_format
+  in
   let format =
-    Option.value opt_format ~default:Standaml.Tui.Standing_format.Classic in
-  let limit = if !limit <= 0 then None else Some !limit in
-  !competitions |> List.rev
+    Option.value opt_format' ~default:Standaml.Tui.Standing_format.Classic in
+  competitions
   |> List.iter ~f:(fun competition ->
          fetch_standing_or_error ~token ~competition ~format ~limit)
+
+let command =
+  Command.basic_spec ~summary:"Standing of your favourite football leagues"
+    Command.Spec.(
+      empty
+      +> anon (sequence ("competition_code" %: string))
+      +> flag "-t" (optional string)
+           ~doc:
+             "token Football API token (not needed if specified in the config file)"
+      +> flag "-f" (optional string)
+           ~doc:"format Desired format (classic OR one-line, default is classic)"
+      +> flag "-n" (optional int)
+           ~doc:
+             "limit Limit how many teams per competition should be displayed in the \
+              standings")
+    run_command
+
+let () = Command_unix.run command
