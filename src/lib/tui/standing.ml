@@ -51,7 +51,7 @@ let display_standing ~(standing : Model.Standing.t) ~standing_format ~limit =
   | Classic ->
       trimmed_lines
       |> prepare_columns columns_to_display_in_classic_view
-      |> Matrix.pretty_display
+      |> Matrix.pretty_display ~colour_scheme:[ ("Benfica", Colour.Basic.Red) ]
   | One_line ->
       trimmed_lines
       |> List.map ~f:(fun standing_line ->

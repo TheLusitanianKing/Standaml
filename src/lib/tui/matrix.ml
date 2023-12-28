@@ -6,7 +6,7 @@ let fill_with content n ~fill_with_char =
 let fill_with_space = fill_with ~fill_with_char:' '
 
 (** list of list of string (+ the max size, for each column) *)
-let pretty_display (matrix : (int * string list) list) =
+let pretty_display ?(colour_scheme = []) (matrix : (int * string list) list) =
   let (matrix_reworked : (int * string) list list) =
     List.map
       ~f:(fun (max_size, l) -> List.map ~f:(fun x -> (max_size, x)) l)
@@ -17,7 +17,16 @@ let pretty_display (matrix : (int * string list) list) =
        ~f:(fun i row ->
          let printed_row =
            String.concat ~sep:" | "
-           @@ List.map ~f:(fun (i, s) -> fill_with_space s i) row in
+           @@ List.map
+                ~f:(fun (i, s) ->
+                  let s' = fill_with_space s i in
+                  colour_scheme
+                  |> List.find ~f:(fun (team, _) ->
+                         s |> String.is_substring ~substring:team)
+                  |> Option.bind ~f:(fun (_, colour) ->
+                         Some (Colour.Basic.colourized_text colour s'))
+                  |> Option.value ~default:s')
+                row in
          if i = 0 then
            let dotted_row =
              String.concat ~sep:"---"

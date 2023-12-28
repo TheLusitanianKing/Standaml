@@ -23,7 +23,7 @@ let fetch_standing_or_error ~token ~competition ~format ~limit =
       let standing_display =
         Standaml.Tui.Standing.display_standing ~standing ~standing_format:format
           ~limit in
-      Stdio.print_endline standing_display
+      Stdio.print_endline @@ standing_display ^ "\n"
 
 let run_command competitions opt_token opt_format limit () =
   let token = Option.value opt_token ~default:get_token_from_config_or_fail in
@@ -43,13 +43,15 @@ let command =
       +> anon (sequence ("competition_code" %: string))
       +> flag "-t" (optional string)
            ~doc:
-             "token Football API token (not needed if specified in the config file)"
+             "token Football API token (not needed if specified in the config \
+              file)"
       +> flag "-f" (optional string)
-           ~doc:"format Desired format (classic OR one-line, default is classic)"
+           ~doc:
+             "format Desired format (classic OR one-line, default is classic)"
       +> flag "-n" (optional int)
            ~doc:
-             "limit Limit how many teams per competition should be displayed in the \
-              standings")
+             "limit Limit how many teams per competition should be displayed \
+              in the standings")
     run_command
 
 let () = Command_unix.run command
