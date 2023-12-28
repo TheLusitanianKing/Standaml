@@ -12,7 +12,9 @@ let get_token_from_config_or_fail =
          with the option -t."
   | Some conf_token -> conf_token
 
-let fetch_standing_or_error ~token ~competition ~format ~limit =
+let get_colour_scheme = Some [ ("Benfica", Standaml.Tui.Colour.Basic.Red) ]
+
+let fetch_standing_or_error ?format ?limit ?colour_scheme ~token ~competition =
   let opt_standing =
     Lwt_main.run @@ Standaml.Api.fetch_standing ~token ~competition in
   match opt_standing with
@@ -21,20 +23,20 @@ let fetch_standing_or_error ~token ~competition ~format ~limit =
       @@ Printf.sprintf "Couldn't fetch standing for competition %s" competition
   | Some standing ->
       let standing_display =
-        Standaml.Tui.Standing.display_standing ~standing ~standing_format:format
-          ~limit in
+        Standaml.Tui.Standing.display_standing ?standing_format:format ?limit
+          ?colour_scheme ~standing in
       Stdio.print_endline @@ standing_display ^ "\n"
 
 let run_command competitions opt_token opt_format limit () =
-  let token = Option.value opt_token ~default:get_token_from_config_or_fail in
+  let token = opt_token |> Option.value ~default:get_token_from_config_or_fail in
+  let opt_colour_scheme = get_colour_scheme in
   let opt_format' =
     Option.bind opt_format ~f:Standaml.Tui.Standing_format.string_to_format
   in
-  let format =
-    Option.value opt_format' ~default:Standaml.Tui.Standing_format.Classic in
   competitions
   |> List.iter ~f:(fun competition ->
-         fetch_standing_or_error ~token ~competition ~format ~limit)
+         fetch_standing_or_error ~token ~competition ?format:opt_format' ?limit
+           ?colour_scheme:opt_colour_scheme)
 
 let command =
   Command.basic_spec ~summary:"Standing of your favourite football leagues"

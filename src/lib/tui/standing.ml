@@ -33,12 +33,21 @@ let prepare_columns columns standing_lines =
       (max_size, col_name :: List.map ~f:(fun (_, x) -> x) lines_with_sizes))
     columns
 
-let display_standing_line_one_line ~(standing_line : Model.Standing_line.t) =
-  Printf.sprintf "%d. %s (%d pts)" standing_line.position
-    standing_line.team_name
+let display_standing_line_one_line ~colour_scheme
+    ~(standing_line : Model.Standing_line.t) =
+  let team_name = standing_line.team_name in
+  let colourized_team_name =
+    colour_scheme
+    |> List.find ~f:(fun (team, _) ->
+           team_name |> String.is_substring ~substring:team)
+    |> Option.bind ~f:(fun (_, colour) ->
+           Some (Colour.Basic.colourized_text colour team_name))
+    |> Option.value ~default:team_name in
+  Printf.sprintf "%d. %s (%d pts)" standing_line.position colourized_team_name
     (Model.Standing_line.points standing_line)
 
-let display_standing ~(standing : Model.Standing.t) ~standing_format ~limit =
+let display_standing ?(standing_format = Standing_format.Classic) ?limit
+    ?(colour_scheme = []) ~(standing : Model.Standing.t) =
   let sorted_standing_lines =
     standing.team_standings |> List.sort ~compare:Model.Standing_line.compare
   in
@@ -51,9 +60,9 @@ let display_standing ~(standing : Model.Standing.t) ~standing_format ~limit =
   | Classic ->
       trimmed_lines
       |> prepare_columns columns_to_display_in_classic_view
-      |> Matrix.pretty_display ~colour_scheme:[ ("Benfica", Colour.Basic.Red) ]
+      |> Matrix.pretty_display ~colour_scheme
   | One_line ->
       trimmed_lines
       |> List.map ~f:(fun standing_line ->
-             display_standing_line_one_line ~standing_line)
+             display_standing_line_one_line ~colour_scheme ~standing_line)
       |> String.concat ~sep:" - "

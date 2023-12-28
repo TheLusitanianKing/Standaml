@@ -10,13 +10,16 @@ val prepare_columns :
     returns the matrix with each column also having its max size *)
 
 val display_standing_line_one_line :
-  standing_line:Model.Standing_line.t -> string
+     colour_scheme:Colour.Colour_scheme.t
+  -> standing_line:Model.Standing_line.t
+  -> string
 (** For the one line format, display a single line *)
 
 val display_standing :
-     standing:Model.Standing.t
-  -> standing_format:Standing_format.t
-  -> limit:int option
+     ?standing_format:Standing_format.t
+  -> ?limit:int
+  -> ?colour_scheme:Colour.Colour_scheme.t
+  -> standing:Model.Standing.t
   -> string
 (** This is the most important function of the module
     display the standing, according to the format and the limit (if any) *)
