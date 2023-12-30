@@ -1,5 +1,5 @@
 open Base
-open Config
+open Utils.Config
 
 let%test "parsing single line (1)" =
   Option.is_none @@ parse_config_single_line "A="
