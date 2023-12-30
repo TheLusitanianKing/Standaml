@@ -43,14 +43,16 @@ let command =
     Command.Spec.(
       empty
       +> anon (sequence ("competition_code" %: string))
-      +> flag "-t" (optional string)
+      +> flag "--token" (optional string) ~full_flag_required:()
+           ~aliases:[ "-t" ]
            ~doc:
              "token Football API token (not needed if specified in the config \
               file)"
-      +> flag "-f" (optional string)
+      +> flag "--format" (optional string) ~full_flag_required:()
+           ~aliases:[ "-f" ]
            ~doc:
              "format Desired format (classic OR one-line, default is classic)"
-      +> flag "-n" (optional int)
+      +> flag "--limit" (optional int) ~full_flag_required:() ~aliases:[ "-n" ]
            ~doc:
              "limit Limit how many teams per competition should be displayed \
               in the standings")
