@@ -46,16 +46,19 @@ let command =
       +> flag "--token" (optional string) ~full_flag_required:()
            ~aliases:[ "-t" ]
            ~doc:
-             "token Football API token (not needed if specified in the config \
-              file)"
+             ("token" ^ " "
+            ^ "Football API token (not needed if specified in the config file)"
+             )
       +> flag "--format" (optional string) ~full_flag_required:()
            ~aliases:[ "-f" ]
            ~doc:
-             "format Desired format (classic OR one-line, default is classic)"
+             ("format" ^ " "
+            ^ "Desired format (classic OR one-line, default is classic)")
       +> flag "--limit" (optional int) ~full_flag_required:() ~aliases:[ "-n" ]
            ~doc:
-             "limit Limit how many teams per competition should be displayed \
-              in the standings")
+             ("nb_of_teams" ^ " "
+            ^ "Limit how many teams per competition should be displayed in the \
+               standings"))
     run_command
 
 let () = Command_unix.run command
