@@ -35,6 +35,17 @@ cp standaml.default.conf standaml.conf # copiar o template
 vim standaml.conf # abrir o ficheiro de configuração com vim (ou outro) e inserir o token no lugar adequado
 ```
 
+### (Opcional) Cores
+Se quiser ter cores associadas à alguns clubes:
+
+```bash
+cp colour.default.conf colour.conf # copiar o template
+vim colour.conf # abrir o ficheiro de configuração
+```
+Pode no ficheiro associar os clubes desta forma: `Clube A=Cor`, cada linha sendo uma instrução.
+As cores disponíveis de momento são: Preto (`Black`), Vermelho (`Red`), Verde (`Green`), Amarelo (`Yellow`), Azul (`Blue`), `Magenta`, Ciano (`Cyan`) e Branco (`White`)
+
+
 ### Pré-requisitos
 #### Opção instalação manual
 Pode optar por instalar tudo localmente, usando o Dockerfile como guia no que diz respeito às versões utilizadas de OCaml e das dependências. Em `src/`, encontrará um `Makefile` que pode usar com `make`, ou usar apenas como referência para ver os comandos `dune` e usar essas diretamente.

@@ -35,6 +35,17 @@ cp standaml.default.conf standaml.conf # copy the template config file
 vim standaml.conf # open the file to fill it with your token
 ```
 
+### (Optional) Colours
+If you wish to associate a colour to a team:
+
+```bash
+cp colour.default.conf colour.conf # copy the template
+vim colour.conf # open the file
+```
+
+In that file, you can associate a colour to a team this way: `Team A=Colour`, each line being a separate instruction.
+Available colours at the moment being: `Black`, `Red`, `Green`, `Yellow`, `Blue`, `Magenta`, `Cyan` and `White`.
+
 ### Prerequisites
 #### Manual installation option
 You can choose to install everything locally, using the Dockerfile as a guide to install the right OCaml version and all the libraries dependencies. In `src/`, you'll find a `Makefile` that you can use with `make` instructions, or just read the file to see the existing `dune` commands and use those directly.
