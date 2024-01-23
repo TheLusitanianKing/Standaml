@@ -11,17 +11,13 @@ Fonte dos resultados: https://www.football-data.org
 ```bash
 # primeiras 5 equipas da Primeira Liga portuguesa (código: PPL)
 dune exec standaml -- PPL -n 5
-> Rank | Team                       | P  | W | D | L | GF | GA | GD | Points
-> --------------------------------------------------------------------------
-> 1    | Sport Lisboa e Benfica     | 11 | 9 | 1 | 1 | 23 | 9  | 14 | 28    
-> 2    | Sporting Clube de Portugal | 11 | 9 | 1 | 1 | 23 | 11 | 12 | 28    
-> 3    | FC Porto                   | 11 | 8 | 1 | 2 | 15 | 8  | 7  | 25    
-> 4    | Sporting Clube de Braga    | 11 | 7 | 2 | 2 | 30 | 18 | 12 | 23    
-> 5    | Moreirense FC              | 11 | 6 | 2 | 3 | 14 | 10 | 4  | 20    
 
 # pode ver as diferentes opções
-dune exec standaml -- --help
+dune exec standaml -- --help 
 ```
+
+### Exemplo com a Premier League inglesa (Janeiro 2024)
+![example](example.png)
 
 ## Configuração
 
