@@ -34,7 +34,7 @@ let command =
   Command.basic_spec ~summary:"Standing of your favourite football leagues"
     Command.Spec.(
       empty
-      +> anon (sequence ("competition_code" %: string))
+      +> anon (non_empty_sequence_as_list ("competition_code" %: string))
       +> flag "--token" (optional string) ~full_flag_required:()
            ~aliases:[ "-t" ]
            ~doc:
